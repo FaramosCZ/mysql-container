@@ -16,7 +16,7 @@ ENV MYSQL_VERSION=8.4 \
     HOME=/var/lib/mysql \
     NAME=mysql
 
-ENV SUMMARY="MySQL 8.4 SQL database server" \
+ENV SUMMARY="MySQL ${MYSQL_VERSION} SQL database server" \
     DESCRIPTION="MySQL is a multi-user, multi-threaded SQL database server. The container \
 image provides a containerized packaging of the MySQL mysqld daemon and client application. \
 The mysqld server daemon accepts connections from clients and provides access to content from \
@@ -51,9 +51,9 @@ RUN INSTALL_PKGS="policycoreutils rsync tar gettext hostname bind-utils groff-ba
 ENV CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/mysql \
     MYSQL_PREFIX=/usr
 
-COPY 8.4/root-common /
-COPY 8.4/s2i-common/bin/ ${STI_SCRIPTS_PATH}
-COPY 8.4/root /
+COPY ${MYSQL_VERSION}/root-common /
+COPY ${MYSQL_VERSION}/s2i-common/bin/ ${STI_SCRIPTS_PATH}
+COPY ${MYSQL_VERSION}/root /
 
 # Hard links are not supported in Testing Farm approach during sync to guest
 # operation system. Therefore tests are failing on error
